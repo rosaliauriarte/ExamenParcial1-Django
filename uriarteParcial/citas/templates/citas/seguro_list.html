@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="center">
+	<h2>Tipos de Seguros</h2>
+    <a href="{%url 'tiposeguro-create'%}"><i class="bi bi-list-document"></i> Crear Tipo de Seguro</a>              
+	{% if tiposeguro %}
+    <ul class="tiposeguro">
+        {% for tiposeguro in tiposeguro %}
+        
+        <li>
+            <a href="#" class="">{{ tiposeguro.tipo_seguro_nombre }}</a>....  
+            <a href="{% url 'tiposeguro-update' tiposeguro.id %}"><i class="bi bi-pencil-square"></i></a>
+            <form action="{% url 'tiposeguro-delete' tiposeguro.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Eliminar</i>
+            </button>
+            </form>
+        </li>
+        {% endfor %}
+    {% else %}
+        <p>Aùn no hay tipo de Seguro</p>
+        <a href="{%url 'tiposeguro-create'%}"><i class="bi bi-list-document"></i> Crear Tipo de Seguro</a>              
+    {% endif %}
+	</ul>
+</div>
+{%endblock content%}

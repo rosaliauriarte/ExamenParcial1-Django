@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<div class="center">
+  <h2>Mi lista de especialidades</h2>
+  <a href="{% url 'especialidades-create' %}"><i class="bi bi-plus-circle"></i> Crear Especialidad</a> 
+  {% if especialidades %}
+  <ul class="especialidades">
+    {% for especialidades in especialidades %}
+    <li>
+        <a href="#" class="">{{ especialidades.especialidad_nombre }}</a>....  
+        <a href="{% url 'especialidades-update' especialidades.id %}"><i class="bi bi-pencil-square"></i></a>
+        <form action="{% url 'especialidades-delete' especialidades.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-sm">Eliminar</i>
+        </button>
+        </form>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Qué mal, no tienes especialidades</p>
+  {% endif %}
+</div>
+{% endblock %}
