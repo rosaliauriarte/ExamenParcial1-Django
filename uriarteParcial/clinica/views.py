@@ -3,7 +3,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .models import TipoDoc, TipoSeg,Paciente,Especialidad,Doctor,Cita
+from .models import TipoDocumento, tipoSeguro,Paciente,Especialidades,Doctores,Citas
 from django import forms
 
 # Create your views here.
@@ -12,13 +12,13 @@ def home(request):
     return render(request, 'home.html')
 
 class documentoList(ListView):
-    model = TipoDoc
+    model = TipoDocumento
     context_object_name = "tipodocumento"
     template_name = "citas/documento_list.html"
     
 class documentoCreate(CreateView):
-    model = TipoDoc
-    fields = ["tipo_documento_nombre"]
+    model = TipoDocumento
+    fields = ["nombre"]
     success_url = reverse_lazy("tipodocumento")
     template_name = "citas/documento_form.html"
 
@@ -29,8 +29,8 @@ class documentoCreate(CreateView):
         return super(documentoCreate, self).form_valid(form)
 
 class documentoUpdate(UpdateView):
-    model = TipoDoc
-    fields = ["tipo_documento_nombre"]
+    model = TipoDocumento
+    fields = ["nombre"]
     success_url = reverse_lazy("tipodocumento")
     template_name = "citas/documento_form.html"
 
@@ -39,7 +39,7 @@ class documentoUpdate(UpdateView):
         return super(documentoUpdate, self).form_valid(form)
     
 class documentoDelete(DeleteView):
-    model = TipoDoc
+    model = TipoDocumento
     success_url = reverse_lazy("tipodocumento")
 
     def form_valid(self, request, *args, **kwargs):
@@ -47,13 +47,13 @@ class documentoDelete(DeleteView):
         return super().delete(request, *args, **kwargs)
     
 class seguroList(ListView):
-    model = TipoSeg
+    model = tipoSeguro
     context_object_name = "tiposeguro"
     template_name = "citas/seguro_list.html"
     
 class seguroCreate(CreateView):
-    model = TipoSeg
-    fields = ["tipo_seguro_nombre"]
+    model = tipoSeguro
+    fields = ["nombre"]
     success_url = reverse_lazy("tiposeguro")
     template_name = "citas/seguro_form.html"
 
@@ -64,8 +64,8 @@ class seguroCreate(CreateView):
         return super(seguroCreate, self).form_valid(form)
 
 class seguroUpdate(UpdateView):
-    model = TipoSeg
-    fields = ["tipo_seguro_nombre"]
+    model = tipoSeguro
+    fields = ["nombre"]
     success_url = reverse_lazy("tiposeguro")
     template_name = "citas/seguro_form.html"
 
@@ -74,7 +74,7 @@ class seguroUpdate(UpdateView):
         return super(seguroUpdate, self).form_valid(form)
     
 class seguroDelete(DeleteView):
-    model = TipoSeg
+    model = tipoSeguro
     success_url = reverse_lazy("tiposeguro")
 
     def form_valid(self, request, *args, **kwargs):
@@ -91,14 +91,14 @@ class pacienteList(ListView):
 class PacienteForm(forms.ModelForm):
     class Meta:
         model = Paciente
-        fields = ["nombres", "apellidos", "direccion","nro_documento", "nacimiento", "tipo_seguro", "tipo_documento"]
+        fields = ["nombres", "apellidos", "direccion","nDocumento", "fechaNacimiento", "tiposeguro", "tipodocumento"]
         template_name = "citas/paciente_form.html"
 
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['tipo_seguro'].label_from_instance = lambda obj: obj.tipo_seguro_nombre
-        self.fields['tipo_documento'].label_from_instance = lambda obj: obj.tipo_documento_nombre
+        self.fields['tiposeguro'].label_from_instance = lambda obj: obj.tipo_seguro_nombre
+        self.fields['tipodocumento'].label_from_instance = lambda obj: obj.tipo_documento_nombre
 
 class pacienteCreate(CreateView):
     model = Paciente
@@ -129,13 +129,13 @@ class pacienteDelete(DeleteView):
         return super().delete(request, *args, **kwargs)
     
 class especialidadesList(ListView):
-    model = Especialidad
+    model = Especialidades
     context_object_name = "especialidades"
     template_name = "especialidades_list.html"
     
 class especialidadesCreate(CreateView):
-    model = Especialidad
-    fields = ["especialidad_nombre"]
+    model = Especialidades
+    fields = ["nombre"]
     success_url = reverse_lazy("especialidades")
 
     def form_valid(self, form):
@@ -144,8 +144,8 @@ class especialidadesCreate(CreateView):
         return super(especialidadesCreate, self).form_valid(form)
     
 class especialidadesUpdate(UpdateView):
-    model = Especialidad
-    fields = ["especialidad_nombre"]
+    model = Especialidades
+    fields = ["nombre"]
     success_url = reverse_lazy("especialidades")
 
     def form_valid(self, form):
@@ -153,7 +153,7 @@ class especialidadesUpdate(UpdateView):
         return super(especialidadesUpdate, self).form_valid(form)
     
 class especialidadesDelete(DeleteView):
-    model = Especialidad
+    model = Especialidades
     success_url = reverse_lazy("especialidades")
 
     def form_valid(self, request, *args, **kwargs):
@@ -161,13 +161,13 @@ class especialidadesDelete(DeleteView):
         return super().delete(request, *args, **kwargs)
     
 class doctorList(ListView):
-    model = Doctor
+    model = Doctores
     context_object_name = "doctores"
     template_name = "citas/doctor_list.html"
     
 class doctorCreate(CreateView):
-    model = Doctor
-    fields = ["nombre_doctor","doctor_direccion","doctor_telefono"]
+    model = Doctores
+    fields = ["nombre","direccion","telefono"]
     success_url = reverse_lazy("doctores")
 
     def form_valid(self, form):
@@ -176,8 +176,8 @@ class doctorCreate(CreateView):
         return super(doctorCreate, self).form_valid(form)
     
 class doctorUpdate(UpdateView):
-    model = Doctor
-    fields = ["nombre_doctor","doctor_direccion","doctor_telefono"]
+    model = Doctores
+    fields = ["nombre","direccion","telefono"]
     success_url = reverse_lazy("doctores")
 
     def form_valid(self, form):
@@ -185,7 +185,7 @@ class doctorUpdate(UpdateView):
         return super(doctorUpdate, self).form_valid(form)
     
 class doctorDelete(DeleteView):
-    model = Doctor
+    model = Doctores
     success_url = reverse_lazy("doctores")
 
     def form_valid(self, request, *args, **kwargs):
@@ -193,15 +193,15 @@ class doctorDelete(DeleteView):
         return super().delete(request, *args, **kwargs)
     
 class citasList(ListView):
-    model = Cita
+    model = Citas
     context_object_name = "citas"
     template_name = "citas/citas_list.html"
 
 
 class citasForm(forms.ModelForm):
     class Meta:
-        model = Cita
-        fields = ["fecha_cita","observaciones",  "especialidad", "doctor", "paciente"]
+        model = Citas
+        fields = ["fechaCita","observaciones",  "especialidad", "doctor", "paciente"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -211,7 +211,7 @@ class citasForm(forms.ModelForm):
 
 
 class citasCreate(CreateView):
-    model = Cita
+    model = Citas
     form_class = citasForm
     success_url = reverse_lazy("citas")
     template_name = "citas/citas_form.html"
@@ -223,7 +223,7 @@ class citasCreate(CreateView):
         return super().form_valid(form)
     
 class citasUpdate(UpdateView):
-    model = Cita
+    model = Citas
     form_class = citasForm
     success_url = reverse_lazy("citas")
 
@@ -232,7 +232,7 @@ class citasUpdate(UpdateView):
         return super(citasUpdate, self).form_valid(form)
     
 class citasDelete(DeleteView):
-    model = Cita
+    model = Citas
     success_url = reverse_lazy("citas")
 
     def form_valid(self, request, *args, **kwargs):

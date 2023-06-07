@@ -3,7 +3,10 @@
 <div class="center">
   <form method="post" novalidate class="card">
     {% csrf_token %}
-    <h2>{% if paciente %} Actualizar Paciente {% else %} Crear {% endif %} Paciente</h2>
+    <h2>
+      {% if paciente %} Actualizar Paciente {% else %} Nuevo {% endif %}
+      Paciente
+    </h2>
     {% for field in form %} {% if field.name == 'completed' %}
     <p>{{ field.label_tag }} {{ field }}</p>
     {% if field.errors %}

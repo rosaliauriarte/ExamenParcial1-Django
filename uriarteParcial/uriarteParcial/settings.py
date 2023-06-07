@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'citas','users'
+    'clinica','users'
 ]
 
 MIDDLEWARE = [
@@ -75,13 +75,13 @@ WSGI_APPLICATION = 'uriarteParcial.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-   'default': {
-'ENGINE': 'django.db.backends.postgresql',
-'NAME': 'uriarte_parcial',
-'USER': 'user_uriarte',
-'PASSWORD': '123456',
-'HOST': 'localhost',
-'PORT': '5432',
+    'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'uriarte_parcial',
+    'USER': 'user_uriarte',
+    'PASSWORD': '123456',
+    'HOST': 'localhost',
+    'PORT': '5432',
 }
 }
 

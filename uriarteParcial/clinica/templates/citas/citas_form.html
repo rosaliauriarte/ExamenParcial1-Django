@@ -3,7 +3,7 @@
 <div class="center">
   <form method="post" novalidate class="card">
     {% csrf_token %}
-    <h2>{% if doctores %} Actualizar doctores {% else %} Crear {% endif %} doctor</h2>
+    <h2>{% if citas %} Actualizar Paciente {% else %} Nuev0 Paciente {% endif %} Paciente</h2>
     {% for field in form %} {% if field.name == 'completed' %}
     <p>{{ field.label_tag }} {{ field }}</p>
     {% if field.errors %}
@@ -11,9 +11,10 @@
     {% endif %} {% else %} {{ field.label_tag }} {{ field }}
     <small class="error">{{ field.errors|striptags }}</small>
     {% endif %}{% endfor %}
+
     <div class="form-buttons">
       <input type="submit" value="Save" class="btn btn-primary" />
-      <a href="{% url 'doctores' %}" class="btn btn-outline">Cancel</a>
+      <a href="{% url 'citas' %}" class="btn btn-outline">Cancel</a>
     </div>
   </form>
 </div>

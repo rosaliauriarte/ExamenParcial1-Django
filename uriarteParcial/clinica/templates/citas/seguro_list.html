@@ -10,7 +10,7 @@
         {% for tiposeguro in tiposeguro %}
         
         <li>
-            <a href="#" class="">{{ tiposeguro.tipo_seguro_nombre }}</a>....  
+            <a href="#" class="">{{ tiposeguro.nombre }}</a>....  
             <a href="{% url 'tiposeguro-update' tiposeguro.id %}"><i class="bi bi-pencil-square"></i></a>
             <form action="{% url 'tiposeguro-delete' tiposeguro.id %}" method="post">
             {% csrf_token %}

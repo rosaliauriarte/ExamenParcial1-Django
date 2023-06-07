@@ -2,13 +2,16 @@
 
 <div class="center">
   <h2>Mi lista de Citas</h2>
-  <a href="{% url 'citas-create' %}"><i class="bi bi-plus-circle"></i> Crear cita</a>
+  <a href="{% url 'citas-create' %}"
+    ><i class="bi bi-plus-circle"></i> Nueva cita</a
+  >
   {% if citas %}
   <ul class="citas">
     {% for citas in citas %}
     <li>
       <a href="#" class="{% if citas.completed %}completed{% endif %}">
-        {{ citas.paciente.nombres }} {{ citas.paciente.apellidos }} ( {{ citas.especialidad.especialidad_nombre }} ) - {{ citas.fecha_cita }}
+        {{ citas.paciente.nombre }} {{ citas.paciente.apellidos }} ( {{
+        citas.especialidad.nombre }} ) - {{ citas.fechaCita }}
       </a>
       <div class="task-controls">
         <div class="container-task">
@@ -27,7 +30,7 @@
     {% endfor %}
   </ul>
   {% else %}
-  <p>Qué mal, no tienes citas Registradas</p>
+  <p>No existen citas programadas</p>
   {% endif %}
 </div>
 {% endblock %}

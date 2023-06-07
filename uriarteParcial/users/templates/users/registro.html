@@ -3,7 +3,7 @@
 {% block content %}
 <form method="POST" novalidate>
 	{% csrf_token %}
-	<h2>Sign Up</h2>
+	<h2>Registrarse</h2>
 
 	{% for field in form %}
 	<p>
@@ -20,4 +20,4 @@
 	<input class="btn btn-primary cta" type="submit" value="Registrar" />
 	{% comment %} <p>Already has an account? <a href="{%url 'login' %}">Login</a></p> {% endcomment %}
 </form>
-{% endblock content%}
+{% endblock%}
